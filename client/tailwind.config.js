@@ -8,7 +8,7 @@ module.exports = {
         sidebg: "#1C263D",
         sidebtn: "#304169",
       },
-      height: { side: "24px", header: "50px", chatf: "63px" },
+      height: { side: "24px", header: "50px", chatf: "50px" },
       flex: { chat: "70%" },
       width: { side: "24px" },
       minHeight: { header: "80px" },
