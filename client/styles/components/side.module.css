@@ -1,0 +1,16 @@
+@tailwind components;
+@layer components {
+  .sidebarBtn {
+    @apply w-auto flex  p-3 bg-white rounded-full mb-16 transition duration-300 ease-out;
+  }
+  .sidebarBtn:hover {
+    @apply rounded-lg bg-blue-400;
+  }
+
+  .conversation {
+    @apply bg-white relative  items-center grid grid-cols-convo p-3;
+  }
+  .conversation::after {
+    @apply absolute block w-6 bg-pink-300;
+  }
+}
