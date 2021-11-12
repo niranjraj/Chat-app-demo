@@ -3,9 +3,12 @@
 @tailwind utilities;
 
 @layer components {
+  @font-face {
+    font-family: "helvetica";
+    font-weight: 400;
+    src: url("/fonts/helveticaneue.woff2") format("woff2");
+  }
   body {
     @apply bg-primarybg;
   }
-
- 
 }

@@ -3,6 +3,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      fontFamily: {
+        helvetica: ["helvetica"],
+      },
       colors: {
         primarybg: "#edf0f8",
         sidebg: "#1C263D",
@@ -10,7 +13,7 @@ module.exports = {
       },
       height: { side: "24px", header: "50px", chatf: "50px" },
       flex: { chat: "70%" },
-      width: { side: "24px" },
+      width: { side: "24px", login: "600px" },
       minHeight: { header: "80px" },
       minWidth: { side: "400px" },
       maxWidth: { side: "600px" },
