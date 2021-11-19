@@ -1,0 +1,5 @@
+@layer components {
+  .inputBtn {
+    @apply rounded-full p-4 outline-none bg-white  mb-6 w-full border-solid border border-gray-300;
+  }
+}

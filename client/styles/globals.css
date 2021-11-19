@@ -8,6 +8,11 @@
     font-weight: 400;
     src: url("/fonts/helveticaneue.woff2") format("woff2");
   }
+  @font-face {
+    font-family: "helvetica";
+    font-weight: 500;
+    src: url("/fonts/helveticaneue-medium.woff2") format("woff2");
+  }
   body {
     @apply bg-primarybg;
   }

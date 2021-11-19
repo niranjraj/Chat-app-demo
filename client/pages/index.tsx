@@ -1,7 +1,5 @@
 import React from "react";
 import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
 import { Router, useRouter } from "next/router";
 import Sidebar from "../components/Sidebar";
 import SideContent from "../components/SideContent";
