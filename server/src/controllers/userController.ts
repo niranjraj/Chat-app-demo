@@ -1,6 +1,6 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import User from "../models/user.model";
-import { generateJwtToken } from "../middleware/jwtAuth";
+import { generateJwtToken, generateRefreshToken } from "../middleware/jwtAuth";
 
 class UserController {
   async create(req: Request, res: Response) {
@@ -51,14 +51,20 @@ class UserController {
       const user = await User.findOne({ email });
 
       if (user && (await user.passwordCheck(password))) {
-        res.json({
-          user: {
-            userName: user.userName,
-            email: user.email,
-            pic: user.profileURL,
-          },
-          accessToken: generateJwtToken(user._id),
-        });
+        const refToken = generateRefreshToken(user._id);
+        return res
+          .cookie("refresh_token", refToken, {
+            httpOnly: true,
+            secure: true,
+          })
+          .json({
+            user: {
+              userName: user.userName,
+              email: user.email,
+              pic: user.profileURL,
+            },
+            accessToken: generateJwtToken(user._id),
+          });
       } else {
         res.status(401);
         throw new Error("Invalid Email or Password");
@@ -68,6 +74,17 @@ class UserController {
         error: true,
         errorMessage: err,
       });
+    }
+  }
+
+  async token(req: Request, res: Response, next: NextFunction) {
+    try {
+      const token = req.cookies.refresh_token;
+      if (token === undefined) {
+        res.json("no token");
+      }
+    } catch (e) {
+      console.log("no token");
     }
   }
 }

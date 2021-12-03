@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FormEvent } from "react";
+import React, { FormEvent } from "react";
 
 interface Props {
   text?: string;
@@ -9,6 +9,7 @@ interface Props {
   height?: string;
   width?: string;
   submit?: boolean;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 const Button: React.FC<Props> = ({
   text,
@@ -18,9 +19,14 @@ const Button: React.FC<Props> = ({
   height,
   width,
   submit,
+  onClick,
 }) => {
   return (
-    <button className={style} type={submit ? "submit" : "button"}>
+    <button
+      className={style}
+      type={submit ? "submit" : "button"}
+      onClick={onClick}
+    >
       {icon && alt && (
         <Image src={icon} alt={alt} height={height} width={width} />
       )}

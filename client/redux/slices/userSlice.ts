@@ -45,6 +45,7 @@ export const signUp = createAsyncThunk<void, User, { rejectValue: string }>(
     }
   }
 );
+
 export const signIn = createAsyncThunk<
   responseValues,
   User,

@@ -33,6 +33,13 @@ export function generateJwtToken(id: typeof ObjectId) {
     });
   }
 }
+export function generateRefreshToken(id: typeof ObjectId) {
+  if (JWT_SECRET) {
+    return jwt.sign({ id }, JWT_SECRET, {
+      expiresIn: "90d",
+    });
+  }
+}
 
 function authenticateToken(req: requestID, res: Response, next: NextFunction) {
   let authHeader = req.headers.authorization;

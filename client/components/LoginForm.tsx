@@ -7,6 +7,7 @@ import { loginSchema } from "../util/ValidationSchema";
 import Button from "../components/Button";
 import styles from "../styles/components/auth.module.css";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 type user = {
   email: string;
   password: string;
@@ -30,6 +31,17 @@ const LoginForm: React.FC<Props> = () => {
   const loginHandler = (data: user) => {
     dispatch(signIn({ ...data }));
     console.log(selector);
+  };
+
+  const checkRefresh = async () => {
+    const response = await axios.post(
+      "http://localhost:5000/token",
+      { userName: user },
+
+      {
+        withCredentials: true,
+      }
+    );
   };
 
   return (
@@ -79,6 +91,7 @@ const LoginForm: React.FC<Props> = () => {
         <Button
           style="p-4 text-white font-medium w-full bg-pink-200 rounded-full"
           text="access user"
+          onClick={checkRefresh}
         />
       )}
     </form>

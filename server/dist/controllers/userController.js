@@ -62,7 +62,12 @@ class UserController {
                 }
                 const user = yield user_model_1.default.findOne({ email });
                 if (user && (yield user.passwordCheck(password))) {
-                    res.json({
+                    res
+                        .cookie("refreshToken", (0, jwtAuth_1.generateRefreshToken)(user._id), {
+                        httpOnly: true,
+                        secure: true,
+                    })
+                        .json({
                         user: {
                             userName: user.userName,
                             email: user.email,
@@ -81,6 +86,19 @@ class UserController {
                     error: true,
                     errorMessage: err,
                 });
+            }
+        });
+    }
+    token(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const token = req.cookies.refreshToken;
+                console.log("token");
+                console.log(token);
+                res.json("success");
+            }
+            catch (e) {
+                console.log("no token");
             }
         });
     }

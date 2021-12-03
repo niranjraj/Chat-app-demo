@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.generateJwtToken = void 0;
+exports.generateRefreshToken = exports.generateJwtToken = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const mongoose_1 = __importDefault(require("mongoose"));
@@ -27,6 +27,14 @@ function generateJwtToken(id) {
     }
 }
 exports.generateJwtToken = generateJwtToken;
+function generateRefreshToken(id) {
+    if (JWT_SECRET) {
+        return jsonwebtoken_1.default.sign({ id }, JWT_SECRET, {
+            expiresIn: "90d",
+        });
+    }
+}
+exports.generateRefreshToken = generateRefreshToken;
 function authenticateToken(req, res, next) {
     let authHeader = req.headers.authorization;
     if (!authHeader) {
